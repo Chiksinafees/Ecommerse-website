@@ -1,4 +1,5 @@
 const Items = () => {
+  
   const productsArr = [
     {
       title: "Colors",
@@ -26,27 +27,30 @@ const Items = () => {
     },
   ];
 
+  const addToCart=(e)=>{
+    e.preventDefault()
+    console.log('added to cart')
+  }
+
   return (
     <div>
-      <h1 class="text-center p-4 mb-5 bg-warning text-white ">Music</h1>
+      <h1 className="text-center p-4 mb-5 bg-warning text-white ">Music</h1>
 
       {productsArr.map((item) => (
-        <ul class="text-center">
-        <form key={item.title}>
+        <div key={item.title} className="text-center">
           <h2>{item.title}</h2>
           {
             <img
               src={item.imageUrl}
-              class="rounded mx-auto d-block"
+              className="rounded mx-auto d-block"
               alt={item.title}
             ></img>
           }
           <h3>${item.price}</h3>
-          <button type="button" class="btn btn-info">
+          <button type="button" className="btn btn-info" onClick={addToCart}>
             Add to Cart
           </button>
-        </form>
-        </ul>
+        </div>
       ))}
     </div>
   );
