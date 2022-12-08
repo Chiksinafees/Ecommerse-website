@@ -6,6 +6,8 @@ import Cart from "./component/Cart/Cart";
 import { CartContextProvider } from "./component/Store/Cart-context";
 import { Route } from "react-router-dom";
 import About from "./pages/About";
+import Home from "./pages/Home";
+
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -22,7 +24,9 @@ function App() {
       <NavBar onshow={CartHandler} />
       <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
       {showCart && <Cart onTap={cartCloseHandler} />}
-      <Route path="/home"></Route>
+      <Route path="/home">
+        <Home/>
+      </Route>
       <Route path="/store">
         <Items />
       </Route>
