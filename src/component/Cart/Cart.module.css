@@ -1,128 +1,121 @@
 .cart-items {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    max-height: 20rem;
-    overflow: auto;   
-    box-shadow: 0 1px 10px rgba(238, 3, 3, 0.932);
-    font-weight: bold;
-    /* font-family:monospace; */
-  }
-  .cart-item h2 {
-    margin: 0 0 0.5rem 0;
-    color: #363636;
-  }
-  
-  .summary {
-    width: 10rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .price {
-    font-weight: bold;
-    color: #8a2b06;
-  }
-
-  .img {
-
-  }
-  
-  .amount {
-    font-weight: bold;
-    border: 1px solid #ccc;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    color: #363636;
-    width: 2rem;
-  }
-  
-  .total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin: 1rem 0;
-    
-  }
-  
-  .act {
-    text-align: right;
-    font-style: oblique ;
-    font-weight: bold;
-    margin-left: 1rem;
-  }
-  
-  .act button:hover,
-  .act button:active {
-    background-color: #f11c0d;
-    border-color: #380e01ee;
-    color: white;
-  }
-  
-
-
-  .actions {
-    text-align: right;
-    font-style: oblique ;
-    font-weight: bold;
-  }
-  
-  .actions button {
-    font: inherit;
-    cursor: pointer;
-    background-color: transparent;
-    border: 1px solid #080808;
-    padding: 0.5rem 2rem;
-    border-radius: 5px;
-    margin-left: 1rem;
-  }
-  
-  .actions button:hover,
-  .actions button:active {
-    background-color: #85f5b0;
-    border-color: #013813;
-    color: white;
-  }
-  
-  .actions .button--alt {
-    color: #8a2b06;
-  }
-  
-  .actions .button {
-    background-color: #8a2b06;
-    color: white;
-  }
-
-  .Cart-Items{
- margin: auto;
- width: 90%;
- height: 30%;
- display: flex;
- justify-content: space-between;
- align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 20rem;
+  overflow: auto;
+  box-shadow: 0 1px 10px rgba(238, 3, 3, 0.932);
+  font-weight: bold;
+  /* font-family:monospace; */
 }
-.image-box{
- width: 15%;
- text-align: center;
+.cart-item h2 {
+  margin: 0 0 0.5rem 0;
+  color: #363636;
 }
-.about{
- height: 100%;
+
+.summary {
+  width: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.title{
- padding-top: 5px;
- line-height: 10px;
- font-size: 32px;
- font-family: ‘Open Sans’;
- font-weight: 800;
- color: #202020;
+
+.price {
+  font-weight: bold;
+  color: #8a2b06;
 }
-.subtitle{
- line-height: 10px;
- font-size: 18px;
- font-family: ‘Open Sans’;
- font-weight: 600;
- color: #909090;
+
+.amount {
+  font-weight: bold;
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: #363636;
+  width: 2rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.act {
+  text-align: right;
+  font-style: oblique;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.act button:hover,
+.act button:active {
+  background-color: #f11c0d;
+  border-color: #380e01ee;
+  color: white;
+}
+
+.actions {
+  text-align: right;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #080808;
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+  margin-left: 1rem;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: #85f5b0;
+  border-color: #013813;
+  color: white;
+}
+
+.actions .button--alt {
+  color: #8a2b06;
+}
+
+.actions .button {
+  background-color: #8a2b06;
+  color: white;
+}
+
+.Cart-Items {
+  margin: auto;
+  width: 90%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.image-box {
+  width: 15%;
+  text-align: center;
+}
+.about {
+  height: 100%;
+}
+.title {
+  padding-top: 5px;
+  line-height: 10px;
+  font-size: 32px;
+  font-family: ‘Open Sans’;
+  font-weight: 800;
+  color: #202020;
+}
+.subtitle {
+  line-height: 10px;
+  font-size: 18px;
+  font-family: ‘Open Sans’;
+  font-weight: 600;
+  color: #909090;
 }

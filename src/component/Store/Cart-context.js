@@ -11,17 +11,20 @@ export const CartContextProvider = (props) => {
   const [items, setItems] = useState([]);
 
   const addToCart = (item) => {
-console.log(item)
+    // console.log(item);
     const itemIndex = items.findIndex((album) => album.title === item.title);
     if (itemIndex === -1) {
       setItems([...items, item]);
     } else {
-        const alreadyAddedItem =items[itemIndex]
-        const updateSingleItem= {...alreadyAddedItem, quantity :(alreadyAddedItem.quantity) +(item.quantity)}
-        const updateItems=[...items]
-        updateItems[itemIndex]=updateSingleItem
-        setItems(updateItems)
-      }
+      const alreadyAddedItem = items[itemIndex];
+      const updateSingleItem = {
+        ...alreadyAddedItem,
+        quantity: alreadyAddedItem.quantity + item.quantity,
+      };
+      const updateItems = [...items];
+      updateItems[itemIndex] = updateSingleItem;
+      setItems(updateItems);
+    }
   };
 
   const removeFromCart = (id) => {};

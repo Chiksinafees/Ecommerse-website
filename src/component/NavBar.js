@@ -1,29 +1,39 @@
-import { Navbar, Container } from "react-bootstrap";
 import { useContext } from "react";
 import CartContext from "./Store/Cart-context";
-import classes from './NavBar.module.css'
+import classes from "./NavBar.module.css";
+import { NavLink } from "react-router-dom";
 
 const NavBar = (props) => {
+  const headCtx = useContext(CartContext);
 
-  const headCtx= useContext(CartContext)
-
-  let quantity=0
+  let quantity = 0;
   headCtx.items.forEach((item) => {
-   quantity = quantity +(item.quantity)
+    quantity = quantity + item.quantity;
   });
   return (
-    
-    <Navbar bg="dark" expand="lg" variant="dark">
-      <Container className="mb-1">
-        <Navbar.Brand href="#HOME">HOME</Navbar.Brand>
-        <Navbar.Brand href="#STORE">STORE</Navbar.Brand>
-        <Navbar.Brand href="#ABOUT">ABOUT</Navbar.Brand>
-        <button onClick={props.onshow} className={classes.button}>
-          <span>Cart</span>
-          <span className={classes.badge}>{quantity}</span>
+    <header className={classes.header}>
+      <nav>
+        <ul>
+          <li>
+            <NavLink activeClassName={classes.active} to="/home">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName={classes.active} to="/store">
+              Store
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/about">About</NavLink>
+          </li>
+          <button onClick={props.onshow} className={classes.button}>
+            <span>Cart</span>
+            <span className={classes.badge}>{quantity}</span>
           </button>
-      </Container>
-    </Navbar>
+        </ul>
+      </nav>
+    </header>
   );
 };
 

@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import CartContext from "./Store/Cart-context";
 const Items = () => {
-  
-  const cartctx= useContext(CartContext)
+  const cartctx = useContext(CartContext);
 
   const productsArr = [
     {
@@ -30,15 +29,15 @@ const Items = () => {
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
     },
   ];
-let quantity=0
-  const addToCart=(item)=>{
-   // e.preventDefault()
-    console.log('added to cart')
-    quantity=quantity+1
-    console.log(quantity)
-    cartctx.addItem({...item, quantity:quantity})
-  //   const quantity=
-  }
+  let quantity = 0;
+  const addToCart = (item) => {
+    // e.preventDefault()
+    // console.log('added to cart')
+    quantity = quantity + 1;
+    // console.log(quantity)
+    cartctx.addItem({ ...item, quantity: quantity });
+    //   const quantity=
+  };
 
   return (
     <div>
@@ -55,7 +54,11 @@ let quantity=0
             ></img>
           }
           <h3>${item.price}</h3>
-          <button type="button" className="btn btn-info" onClick={addToCart.bind(null,item)}>
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={addToCart.bind(null, item)}
+          >
             Add to Cart
           </button>
         </div>

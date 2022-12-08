@@ -5,7 +5,10 @@ import CartContext from "../Store/Cart-context";
 
 const Cart = (props) => {
   const ctx = useContext(CartContext);
-  const totalAmount = `$${ctx.totalAmount.toFixed(2)}`;
+
+  const totalAmount = ctx.items.reduce((currNum, item) => {
+    return item.price * item.quantity + currNum;
+  }, 0);
 
   const minusItem = (title) => {
     ctx.removeCart(title);
@@ -35,7 +38,7 @@ const Cart = (props) => {
       </div>
       <h1 className="text-center">CART</h1>
       {cartEle}
-      <div className={classes.act}>{totalAmount}</div>
+      <div className={classes.act}>${totalAmount}</div>
     </Modal>
   );
 };
