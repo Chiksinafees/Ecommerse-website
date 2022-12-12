@@ -27,6 +27,9 @@ const NavBar = (props) => {
           <li>
             <NavLink to="/about">About</NavLink>
           </li>
+          <li>
+            <NavLink to="/contact">Contact</NavLink>
+          </li>
           <button onClick={props.onshow} className={classes.button}>
             <span>Cart</span>
             <span className={classes.badge}>{quantity}</span>
