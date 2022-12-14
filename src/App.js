@@ -4,10 +4,11 @@ import NavBar from "./component/NavBar";
 import Items from "./component/Items";
 import Cart from "./component/Cart/Cart";
 import { CartContextProvider } from "./component/Store/Cart-context";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
+import ItemsDetails from "./pages/ItemsDetails";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -40,18 +41,23 @@ function App() {
       <NavBar onshow={CartHandler} />
       <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
       {showCart && <Cart onTap={cartCloseHandler} />}
-      <Route path="/home">
-        <Home />
-      </Route>
-      <Route path="/store">
-        <Items />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/contact">
-        <Contact queryform={firebaseSubmitHandler} />
-      </Route>
+      <Switch>
+        <Route path="/home">
+          <Home />
+        </Route>
+        <Route path="/store" exact>
+          <Items />
+        </Route>
+        <Route path="/store/:title">
+          <ItemsDetails />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/contact">
+          <Contact queryform={firebaseSubmitHandler} />
+        </Route>
+      </Switch>
     </CartContextProvider>
   );
 }

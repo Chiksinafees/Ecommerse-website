@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import CartContext from "./Store/Cart-context";
 const Items = () => {
   const cartctx = useContext(CartContext);
@@ -24,7 +25,7 @@ const Items = () => {
     },
     {
       title: "Blue Color",
-      price: 100,
+      price: 250,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
     },
@@ -46,13 +47,10 @@ const Items = () => {
       {productsArr.map((item) => (
         <div key={item.title} className="text-center" id={item.title}>
           <h2>{item.title}</h2>
-          {
-            <img
-              src={item.imageUrl}
-              className="rounded mx-auto d-block"
-              alt={item.title}
-            ></img>
-          }
+          <Link to={`/store/${item.title}`}>
+            <img src={item.imageUrl} alt={item.title}></img>
+          </Link>
+
           <h3>${item.price}</h3>
           <button
             type="button"

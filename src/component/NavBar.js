@@ -12,7 +12,7 @@ const NavBar = (props) => {
   });
   return (
     <header className={classes.header}>
-      <nav>
+      <section>
         <ul>
           <li>
             <NavLink activeClassName={classes.active} to="/home">
@@ -35,7 +35,7 @@ const NavBar = (props) => {
             <span className={classes.badge}>{quantity}</span>
           </button>
         </ul>
-      </nav>
+      </section>
     </header>
   );
 };
