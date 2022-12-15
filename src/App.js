@@ -64,6 +64,9 @@ function App() {
         <Route path="/Login">
           <Login />
         </Route>
+        <Route path="/Logout">
+          <Login />
+        </Route>
       </Switch>
     </CartContextProvider>
   );

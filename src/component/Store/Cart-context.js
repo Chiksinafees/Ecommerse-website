@@ -5,10 +5,28 @@ const CartContext = React.createContext({
   totalAmount: 0,
   addItem: (item) => {},
   removeCart: (id) => {},
+
+  token: "",
+  isLoggedIn: false,
+  login: (token) => {},
+  logout: () => {},
 });
 
 export const CartContextProvider = (props) => {
   const [items, setItems] = useState([]);
+  const [token, setToken] = useState(null);
+
+  const userIsLoggedIn = !!token;
+
+  const loginHandler = (token) => {
+    setToken(token);
+    localStorage.setItem("token", token);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+  };
 
   const addToCart = (item) => {
     // console.log(item);
@@ -34,6 +52,11 @@ export const CartContextProvider = (props) => {
     totalAmount: 0,
     addItem: addToCart,
     removeCart: removeFromCart,
+
+    token: token,
+    isLoggedIn: userIsLoggedIn,
+    login: loginHandler,
+    logout: logoutHandler,
   };
 
   return (

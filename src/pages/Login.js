@@ -1,7 +1,13 @@
 import { useState } from "react";
 import classes from "./Login.module.css";
+import CartContext from "../component/Store/Cart-context";
+import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  const logCtx = useContext(CartContext);
+  const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
@@ -53,7 +59,9 @@ const Login = () => {
         }
       })
       .then((data) => {
-        console.log(data);
+        console.log(data.idToken);
+        logCtx.login(data.idToken);
+        history.replace("/");
       })
       .catch((err) => {
         alert(err.message);
