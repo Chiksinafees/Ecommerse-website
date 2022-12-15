@@ -25,10 +25,19 @@ const NavBar = (props) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about">About</NavLink>
+            <NavLink activeClassName={classes.active} to="/about">
+              About
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink activeClassName={classes.active} to="/contact">
+              Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName={classes.active} to="/Login">
+              Login
+            </NavLink>
           </li>
           <button onClick={props.onshow} className={classes.button}>
             <span>Cart</span>
