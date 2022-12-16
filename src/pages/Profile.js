@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import classes from "./Login.module.css";
 import CartContext from "../component/Store/Cart-context";
+import { useHistory } from "react-router-dom";
 
 const Profile = () => {
   const profCtx = useContext(CartContext);
+  const history = useHistory();
 
   const [newpassword, setNewPassword] = useState("");
 
@@ -29,8 +31,10 @@ const Profile = () => {
         },
       }
     ).then((res) => {
-      //...
+      history.replace("/");
     });
+    profCtx.logout();
+    setNewPassword("");
   };
 
   return (

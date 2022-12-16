@@ -59,7 +59,6 @@ const Login = () => {
         }
       })
       .then((data) => {
-        console.log(data.idToken);
         logCtx.login(data.idToken);
         history.replace("/");
       })

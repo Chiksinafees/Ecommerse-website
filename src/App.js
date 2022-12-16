@@ -11,9 +11,12 @@ import Contact from "./pages/Contact";
 import ItemsDetails from "./pages/ItemsDetails";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import CartContext from "./component/Store/Cart-context";
+import { useContext } from "react";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
+  const appCtx = useContext(CartContext);
 
   const CartHandler = () => {
     setShowCart(true);
@@ -66,7 +69,8 @@ function App() {
           <Login />
         </Route>
         <Route path="/profile">
-          <Profile />
+          {!appCtx.isLoggedIn && <Profile />}
+          {appCtx.isLoggedIn && <Login />}
         </Route>
         <Route path="/Logout">
           <Login />
