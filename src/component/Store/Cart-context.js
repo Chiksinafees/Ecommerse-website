@@ -14,7 +14,10 @@ const CartContext = React.createContext({
 
 export const CartContextProvider = (props) => {
   const [items, setItems] = useState([]);
-  const [token, setToken] = useState(null);
+
+  const initialToken = localStorage.getItem("token");
+
+  const [token, setToken] = useState(initialToken);
 
   const userIsLoggedIn = !!token;
 
@@ -24,8 +27,8 @@ export const CartContextProvider = (props) => {
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem("token");
     setToken(null);
+    localStorage.removeItem("token");
   };
 
   const addToCart = (item) => {

@@ -47,9 +47,6 @@ function App() {
       <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Switch>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
         <Route path="/home">
           <Home />
         </Route>
@@ -70,10 +67,14 @@ function App() {
         </Route>
         <Route path="/profile">
           {!appCtx.isLoggedIn && <Profile />}
-          {appCtx.isLoggedIn && <Login />}
+          {appCtx.isLoggedIn && <Redirect to="/Login" />}
         </Route>
         <Route path="/Logout">
           <Login />
+        </Route>
+        <Route path="*">
+          {/* ( option 2)  */}
+          <Redirect to="/" />
         </Route>
       </Switch>
     </CartContextProvider>

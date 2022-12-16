@@ -4,19 +4,19 @@ import classes from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
 
 const NavBar = (props) => {
-
   const headCtx = useContext(CartContext);
   const isLoggedIn = headCtx.isLoggedIn;
 
   const logoutHandlerfn = () => {
     headCtx.logout();
+    // redirect to login page... (option 1)
   };
 
   let quantity = 0;
   headCtx.items.forEach((item) => {
     quantity = quantity + item.quantity;
   });
-  
+
   return (
     <header className={classes.header}>
       <section>
