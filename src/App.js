@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import ItemsDetails from "./pages/ItemsDetails";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -44,7 +45,7 @@ function App() {
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Switch>
         <Route exact path="/">
-          <Redirect to="/store" />
+          <Redirect to="/home" />
         </Route>
         <Route path="/home">
           <Home />
@@ -63,6 +64,9 @@ function App() {
         </Route>
         <Route path="/Login">
           <Login />
+        </Route>
+        <Route path="/profile">
+          <Profile />
         </Route>
         <Route path="/Logout">
           <Login />
