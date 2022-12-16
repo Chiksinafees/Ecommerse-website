@@ -60,7 +60,7 @@ const Login = () => {
       })
       .then((data) => {
         logCtx.login(data.idToken);
-        history.replace("/");
+        history.replace("/store");
       })
       .catch((err) => {
         alert(err.message);

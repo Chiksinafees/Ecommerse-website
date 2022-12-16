@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import CartContext from "./component/Store/Cart-context";
 import { useContext } from "react";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -47,13 +48,16 @@ function App() {
       <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
         <Route path="/home">
           <Home />
         </Route>
-        <Route path="/store" exact>
-          <Items />
+        <Route path="/store">
+          {appCtx.isLoggedIn == true ? <Login /> : <Items />}
         </Route>
-        <Route path="/store/:title">
+        <Route path="/store/:title" exact>
           <ItemsDetails />
         </Route>
         <Route path="/about">
@@ -67,13 +71,12 @@ function App() {
         </Route>
         <Route path="/profile">
           {!appCtx.isLoggedIn && <Profile />}
-          {appCtx.isLoggedIn && <Redirect to="/Login" />}
+          {appCtx.isLoggedIn && <Redirect to="/Login" exact />}
         </Route>
         <Route path="/Logout">
           <Login />
         </Route>
-        <Route path="*">
-          {/* ( option 2)  */}
+        <Route path="*">          {/* ( option 2)  */}
           <Redirect to="/" />
         </Route>
       </Switch>

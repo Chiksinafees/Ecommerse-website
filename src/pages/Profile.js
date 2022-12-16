@@ -31,7 +31,7 @@ const Profile = () => {
         },
       }
     ).then((res) => {
-      history.replace("/");
+      history.replace("/Login");
     });
     profCtx.logout();
     setNewPassword("");
