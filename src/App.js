@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import NavBar from "./component/NavBar";
 import Items from "./component/Items";
 import Cart from "./component/Cart/Cart";
-import { CartContextProvider } from "./component/Store/Cart-context";
 import { Redirect, Route, Switch } from "react-router-dom";
 import About from "./pages/About";
 import Home from "./pages/Home";
@@ -13,11 +12,13 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import CartContext from "./component/Store/Cart-context";
 import { useContext } from "react";
-import HomePage from "./pages/HomePage";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
+
   const appCtx = useContext(CartContext);
+
+  const isLoggedIn = appCtx.isLoggedIn;
 
   const CartHandler = () => {
     setShowCart(true);
@@ -43,44 +44,52 @@ function App() {
   }
 
   return (
-    <CartContextProvider>
+    <React.Fragment>
       <NavBar onshow={CartHandler} />
       <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route path="/home">
+      {isLoggedIn &&<Route exact path="/home">
           <Home />
+        </Route>}
+        {isLoggedIn && (
+          <Route exact path="/store">
+            <Items />
+          </Route>
+        )}
+        {isLoggedIn && (
+          <Route exact path="/store/:title">
+            <ItemsDetails />
+          </Route>
+        )}
+        {isLoggedIn && (
+          <Route exact path="/about">
+            <About />
+          </Route>
+        )}
+        {isLoggedIn && (
+          <Route exact path="/contact">
+            <Contact queryform={firebaseSubmitHandler} />
+          </Route>
+        )}
+        <Route exact path="/Login">
+          {!isLoggedIn && <Login />}
         </Route>
-        <Route path="/store">
-          {appCtx.isLoggedIn == true ? <Login /> : <Items />}
-        </Route>
-        <Route path="/store/:title" exact>
-          <ItemsDetails />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/contact">
-          <Contact queryform={firebaseSubmitHandler} />
-        </Route>
-        <Route path="/Login">
-          <Login />
-        </Route>
-        <Route path="/profile">
-          {!appCtx.isLoggedIn && <Profile />}
-          {appCtx.isLoggedIn && <Redirect to="/Login" exact />}
-        </Route>
+        {isLoggedIn && (
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+        )}
         <Route path="/Logout">
           <Login />
         </Route>
-        <Route path="*">          {/* ( option 2)  */}
-          <Redirect to="/" />
+        <Route path="*">
+          {" "}
+          {/* ( option 2)  */}
+          <Redirect to="/Login" />
         </Route>
       </Switch>
-    </CartContextProvider>
+    </React.Fragment>
   );
 }
 

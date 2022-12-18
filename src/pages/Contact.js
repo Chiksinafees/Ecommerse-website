@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container } from "react-bootstrap";
+import classes from "./Login.module.css";
 
 const Contact = (props) => {
   const [name, setName] = useState("");
@@ -32,17 +32,34 @@ const Contact = (props) => {
   };
 
   return (
-    <Container>
+    <section className={classes.auth}>
       <form onSubmit={queryhandler}>
-        <label htmlFor="name">Name:</label>
-        <input id="name" type="text" value={name} onChange={nameHandler} />
-        <label htmlFor="number">Phone No:</label>
-        <input id="number" type="tel" value={number} onChange={numberHandler} />
-        <label htmlFor="email">Email:</label>
-        <input id="email" type="email" value={email} onChange={emailHandler} />
-        <button type="submit">submit</button>
+        <div className={classes.control}>
+          <label htmlFor="name">Name:</label>
+          <input id="name" type="text" value={name} onChange={nameHandler} />
+
+          <label htmlFor="number">Phone No:</label>
+          <input
+            id="number"
+            type="tel"
+            value={number}
+            onChange={numberHandler}
+          />
+
+          <label htmlFor="email">Email:</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={emailHandler}
+          />
+        </div>
+
+        <div className={classes.actions}>
+          <button type="submit">submit</button>
+        </div>
       </form>
-    </Container>
+    </section>
   );
 };
 
