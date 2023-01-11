@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, } from "react";
 import CartContext from "./Store/Cart-context";
 import classes from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
@@ -7,15 +7,10 @@ const NavBar = (props) => {
   const headCtx = useContext(CartContext);
   const isLoggedIn = headCtx.isLoggedIn;
 
+  const quantity=headCtx.value
   const logoutHandlerfn = () => {
     headCtx.logout();
-    // redirect to login page... (option 1)
   };
-
-  let quantity = 0;
-  headCtx.items.forEach((item) => {
-    quantity = quantity + item.quantity;
-  });
 
   return (
     <header className={classes.header}>

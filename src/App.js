@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "./component/NavBar";
 import Items from "./component/Items";
 import Cart from "./component/Cart/Cart";
@@ -15,11 +15,40 @@ import { useContext } from "react";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
-
   const appCtx = useContext(CartContext);
 
   const isLoggedIn = appCtx.isLoggedIn;
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+    try {
+      const get = await fetch(
+        `https://crudcrud.com/api/ca7af99770a54637b0d664dbd5f513da/cart${appCtx.email}`
+      );
+      const data = await get.json();
+      
+      const dataArray = data.map((item) => item);
+      appCtx.cartArrayFunction(dataArray);
+
+      const cartItems = data.reduce((curNum, item) => {
+        return curNum + item.quantity;
+      }, 0);
+      appCtx.numberOfItems(cartItems);
+
+      const cartPrice = data.reduce((curNum, item) => {
+        return curNum + item.quantity * item.price;
+      }, 0);
+      appCtx.cartPrice(cartPrice);
+    } catch {
+      const cartPrice = appCtx.items.reduce((curNum, item) => {
+        return curNum + item.quantity * item.price;
+      }, 0);
+      appCtx.cartPrice(cartPrice);
+    }
+  }
   const CartHandler = () => {
     setShowCart(true);
   };
@@ -49,9 +78,11 @@ function App() {
       <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
       {showCart && <Cart onTap={cartCloseHandler} />}
       <Switch>
-      {isLoggedIn &&<Route exact path="/home">
-          <Home />
-        </Route>}
+        {isLoggedIn && (
+          <Route exact path="/home">
+            <Home />
+          </Route>
+        )}
         {isLoggedIn && (
           <Route exact path="/store">
             <Items />
@@ -84,8 +115,6 @@ function App() {
           <Login />
         </Route>
         <Route path="*">
-          {" "}
-          {/* ( option 2)  */}
           <Redirect to="/Login" />
         </Route>
       </Switch>

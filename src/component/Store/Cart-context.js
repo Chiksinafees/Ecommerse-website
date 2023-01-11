@@ -3,17 +3,31 @@ import React, { useState } from "react";
 const CartContext = React.createContext({
   items: [],
   totalAmount: 0,
-  addItem: (item) => {},
+  addItem: (data) => {},
   removeCart: (id) => {},
 
   token: "",
   isLoggedIn: false,
   login: (token) => {},
   logout: () => {},
+  email:null,
+  numberOfItems: (value) => {},
+  value:0,
+  cartPrice: (val) => {},
+  valuePrice: 0,
+  cartArrayFunction: (items) => {},
+  cartArray: []
 });
 
 export const CartContextProvider = (props) => {
+  
   const [items, setItems] = useState([]);
+  const [value, setValue] = useState(0);
+  const [valuePrice, setValuePrice] = useState(null);
+  const [cartArray, setCartArray] = useState([]);
+  
+  const userEmail= localStorage.getItem("email")
+  const [email,setEmail]= useState(userEmail)
 
   const initialToken = localStorage.getItem("token");
 
@@ -21,38 +35,42 @@ export const CartContextProvider = (props) => {
 
   const userIsLoggedIn = !!token;
 
-  const loginHandler = (token) => {
-    setToken(token);
-    localStorage.setItem("token", token);
+  const loginHandler = (token,email) => {
+    setToken(token)
+    setEmail(email)
+    localStorage.setItem("token", token)
+    localStorage.setItem('email',email)
   };
 
   const logoutHandler = () => {
     setToken(null);
-    localStorage.removeItem("token");
+    setEmail(null)
+    localStorage.removeItem("token")
+    localStorage.removeItem('email')
+  };
+ 
+  const addToCart = (data) => {
+    console.log(data)
+    setItems(data)
+  }
+
+  const numberOfItemsHandler=(num)=>{
+    setValue(num)
+  }
+
+  const cartPriceHandler = (num) => {
+    setValuePrice(num);
   };
 
-  const addToCart = (item) => {
-    // console.log(item);
-    const itemIndex = items.findIndex((album) => album.title === item.title);
-    if (itemIndex === -1) {
-      setItems([...items, item]);
-    } else {
-      const alreadyAddedItem = items[itemIndex];
-      const updateSingleItem = {
-        ...alreadyAddedItem,
-        quantity: alreadyAddedItem.quantity + item.quantity,
-      };
-      const updateItems = [...items];
-      updateItems[itemIndex] = updateSingleItem;
-      setItems(updateItems);
-    }
+  const cartArrayFunctionHandler = (items) => {
+    setCartArray(items);
   };
 
   const removeFromCart = (id) => {};
 
   const cartcontextVal = {
     items: items,
-    totalAmount: 0,
+    totalAmount: items.quantity,
     addItem: addToCart,
     removeCart: removeFromCart,
 
@@ -60,8 +78,15 @@ export const CartContextProvider = (props) => {
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
+    email:email,
+    numberOfItems:  numberOfItemsHandler,
+    value:value,
+    cartPrice: cartPriceHandler,
+    valuePrice: valuePrice,
+    cartArrayFunction: cartArrayFunctionHandler,
+    cartArray: cartArray
   };
-
+     
   return (
     <CartContext.Provider value={cartcontextVal}>
       {props.children}

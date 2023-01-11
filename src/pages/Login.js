@@ -59,7 +59,10 @@ const Login = () => {
         }
       })
       .then((data) => {
-        logCtx.login(data.idToken);
+
+      const regex = /[.@]/g;                          
+      const emailId = data.email.replace(regex, "")
+      logCtx.login(data.idToken, emailId);                
         history.replace("/store");
       })
       .catch((err) => {
