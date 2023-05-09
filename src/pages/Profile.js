@@ -18,7 +18,7 @@ const Profile = () => {
     console.log(newpassword);
 
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCENs_kbPG5MUBwwErYSVMnS9ZTwdVtRHs",
+      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAuiw3yRkuYdQtaOoLPXuPQUXKLE3QEe5k",
       {
         method: "POST",
         body: JSON.stringify({

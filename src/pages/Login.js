@@ -28,10 +28,10 @@ const Login = () => {
     let url;
     if (isLogin) {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCENs_kbPG5MUBwwErYSVMnS9ZTwdVtRHs";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAuiw3yRkuYdQtaOoLPXuPQUXKLE3QEe5k";
     } else {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCENs_kbPG5MUBwwErYSVMnS9ZTwdVtRHs";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAuiw3yRkuYdQtaOoLPXuPQUXKLE3QEe5k";
     }
     fetch(url, {
       method: "POST",
@@ -59,11 +59,12 @@ const Login = () => {
         }
       })
       .then((data) => {
-
-      const regex = /[.@]/g;                          
-      const emailId = data.email.replace(regex, "")
-      logCtx.login(data.idToken, emailId);                
-        history.replace("/store");
+        if (isLogin) {
+          const regex = /[.@]/g;
+          const emailId = data.email.replace(regex, "");
+          logCtx.login(data.idToken, emailId);
+          history.replace("/store");
+        }
       })
       .catch((err) => {
         alert(err.message);

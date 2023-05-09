@@ -1,0 +1,65 @@
+.footer {
+  background-color: #f8f9fa;
+  color: #5f5e5e;
+  padding: 50px 0;
+}
+.footer:hover {
+  color: white;
+}
+
+.footer h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  color: #777;
+  transition: color 0.3s;
+}
+
+.footer ul li a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.footer input.form-control {
+  height: 50px;
+  border-radius: 0;
+  border-color: #ddd;
+  box-shadow: none;
+}
+
+.footer .btn-primary {
+  background-color: #4d4dff;
+  border-color: #4d4dff;
+  border-radius: 25px;
+  transition: all 0.3s;
+}
+
+.footer .btn-primary:hover {
+  background-color: #333;
+  border-color: #333;
+  border-radius: 25px;
+}
+
+.footer p a {
+  color: #4d4dff;
+  transition: color 0.3s;
+}
+
+.footer p a:hover {
+  color: #333;
+}
+
+.footer .whatsapp-icon {
+  color: green;
+}
+.footer .youtube-icon {
+  color: red;
+}

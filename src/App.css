@@ -1,38 +1,112 @@
-.App {
+/* Default styles */
+
+.container {
+  max-width: 1200px;
+  padding: 20px;
+  background-color: rgb(208, 211, 211);
+  box-shadow: 0px 0px 10px black;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  margin: 20px;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.container h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #02768b;
+  color: white;
+  border-radius: 10px;
+}
+
+.container h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: auto;
+  background-color: #02768b;
+  color: white;
+  border-radius: 10px;
+}
+
+.container .text-center {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container .border {
+  border: 2px solid #f7941e;
+  border-radius: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.container .text-white {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.container .text-primary {
+  color: #f7941e;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.container a {
+  text-decoration: none;
+  color: #f7941e;
+  transition: color 0.3s ease;
+}
+
+.container a:hover {
+  color: #03412c;
+}
+
+.container input[type="submit"] {
+  background-color: #f7941e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.container input[type="submit"]:hover {
+  background-color: #d97d1d;
+}
+
+/* Responsive styles */
+
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+    margin: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .container h1 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .container {
+    max-width: 90%;
+    padding: 15px;
+    margin: 15px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .container {
+    max-width: 80%;
+    padding: 15px;
+    margin: 15px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+    margin: 20px;
+    margin-bottom: 20px;
   }
 }

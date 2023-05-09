@@ -1,17 +1,20 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import CartContext from "./component/Store/Cart-context";
+import { useContext } from "react";
+
 import NavBar from "./component/NavBar";
 import Items from "./component/Items";
 import Cart from "./component/Cart/Cart";
-import { Redirect, Route, Switch } from "react-router-dom";
-import About from "./pages/About";
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import ItemsDetails from "./pages/ItemsDetails";
 import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import CartContext from "./component/Store/Cart-context";
-import { useContext } from "react";
+import Footer from "./pages/Footer";
+
+const Contact = React.lazy(() => import("./pages/Contact"));
+const Profile = React.lazy(() => import("./pages/Profile"));
+const Home = React.lazy(() => import("./pages/Home"));
+const About = React.lazy(() => import("./pages/About"));
+const ItemsDetails = React.lazy(() => import("./pages/ItemsDetails"));
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -26,10 +29,11 @@ function App() {
   async function getData() {
     try {
       const get = await fetch(
-        `https://crudcrud.com/api/ca7af99770a54637b0d664dbd5f513da/cart${appCtx.email}`
+        `https://crudcrud.com/api/35e71b380fdc48efa4596060ee9d0e35/${appCtx.email}`
       );
+
       const data = await get.json();
-      
+
       const dataArray = data.map((item) => item);
       appCtx.cartArrayFunction(dataArray);
 
@@ -59,7 +63,7 @@ function App() {
 
   async function firebaseSubmitHandler(obj) {
     const response = await fetch(
-      "https://fetch-movie-d556e-default-rtdb.firebaseio.com/movies.json",
+      `https://e-commerse-8afc7-default-rtdb.firebaseio.com/${appCtx.email}.json`,
       {
         method: "POST",
         body: JSON.stringify(obj),
@@ -74,50 +78,63 @@ function App() {
 
   return (
     <React.Fragment>
-      <NavBar onshow={CartHandler} />
-      <h1 className="text-center p-5  bg-secondary text-white">The Generics</h1>
-      {showCart && <Cart onTap={cartCloseHandler} />}
-      <Switch>
-        {isLoggedIn && (
-          <Route exact path="/home">
-            <Home />
-          </Route>
-        )}
-        {isLoggedIn && (
-          <Route exact path="/store">
-            <Items />
-          </Route>
-        )}
-        {isLoggedIn && (
-          <Route exact path="/store/:title">
-            <ItemsDetails />
-          </Route>
-        )}
-        {isLoggedIn && (
-          <Route exact path="/about">
-            <About />
-          </Route>
-        )}
-        {isLoggedIn && (
-          <Route exact path="/contact">
-            <Contact queryform={firebaseSubmitHandler} />
-          </Route>
-        )}
-        <Route exact path="/Login">
-          {!isLoggedIn && <Login />}
-        </Route>
-        {isLoggedIn && (
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-        )}
-        <Route path="/Logout">
-          <Login />
-        </Route>
-        <Route path="*">
-          <Redirect to="/Login" />
-        </Route>
-      </Switch>
+      <div className=" ">
+        <NavBar onshow={CartHandler} />
+        <h1 className="text-center p-3  bg-secondary text-white">
+          The Generics
+        </h1>
+        {showCart && <Cart onTap={cartCloseHandler} />}
+        <Suspense
+          fallback={
+            <div className="text-center">
+              <h1>loading...</h1>
+            </div>
+          }
+        >
+          <Switch>
+            {isLoggedIn && (
+              <Route exact path="/home">
+                <Home />
+              </Route>
+            )}
+            {isLoggedIn && (
+              <Route exact path="/store">
+                <Items />
+              </Route>
+            )}
+            {isLoggedIn && (
+              <Route exact path="/store/:title">
+                <ItemsDetails />
+              </Route>
+            )}
+            {isLoggedIn && (
+              <Route exact path="/about">
+                <About />
+              </Route>
+            )}
+            {isLoggedIn && (
+              <Route exact path="/contact">
+                <Contact queryform={firebaseSubmitHandler} />
+              </Route>
+            )}
+            <Route exact path="/Login">
+              {!isLoggedIn && <Login />}
+            </Route>
+            {isLoggedIn && (
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+            )}
+            <Route path="/Logout">
+              <Login />
+            </Route>
+            <Route path="*">
+              <Redirect to="/Login" />
+            </Route>
+          </Switch>
+        </Suspense>
+      </div>
+      <Footer />
     </React.Fragment>
   );
 }

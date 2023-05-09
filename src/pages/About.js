@@ -1,8 +1,8 @@
-import { Container } from "react-bootstrap";
+//import { Container } from "react-bootstrap";
 
 const About = () => {
   return (
-         <Container>
+    <div className="container">
       <h1>ABOUT</h1>
       <p>
         Lorem ipsum carrots enhanced rebates. Excellent sayings of a man of
@@ -26,7 +26,7 @@ const About = () => {
         take the hardships of the life of harsh condemn, we are accusing him?
         Him whom something large cisterns.
       </p>
-      </Container>
+    </div>
   );
 };
 

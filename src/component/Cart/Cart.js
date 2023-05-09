@@ -7,21 +7,29 @@ const Cart = (props) => {
   const ctx = useContext(CartContext);
   const cartArray = ctx.cartArray;
 
-  const minusItem = (title) => {
-    ctx.removeCart(title);
+  const emailLink = `https://crudcrud.com/api/35e71b380fdc48efa4596060ee9d0e35/${ctx.email}`;
+
+  const minusItem = async (ele) => {
+    const del = await fetch(`${emailLink}/${ele._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    getData();
   };
 
   useEffect(() => {
     getData();
   }, [ctx.items]);
 
-  async function getData() {
+  const getData = async () => {
     try {
       const get = await fetch(
-        `https://crudcrud.com/api/ca7af99770a54637b0d664dbd5f513da/cart${ctx.email}`
+        `https://crudcrud.com/api/35e71b380fdc48efa4596060ee9d0e35/${ctx.email}`
       );
-      const data = await get.json();
 
+      const data = await get.json();
       const dataArray = data.map((item) => item);
       ctx.cartArrayFunction(dataArray);
 
@@ -30,36 +38,50 @@ const Cart = (props) => {
       }, 0);
 
       ctx.cartPrice(cartPrice);
+
+      const numberofCartItems = data.reduce((curNum, item) => {
+        return curNum + item.quantity;
+      }, 0);
+      ctx.numberOfItems(numberofCartItems);
     } catch {
       const cartPrice = ctx.items.reduce((curNum, item) => {
         return curNum + item.quantity * item.price;
       }, 0);
       ctx.cartPrice(cartPrice);
-     
     }
-  }
+  };
+
   return (
     <Modal onTap={props.onTap}>
-      <div className={classes.act}>
-        <button onClick={props.onTap}>x</button>
+      <div className={classes.cartContainer}>
+        <div className={classes.header}>
+          <span>
+            <h1>CART</h1>
+          </span>
+          <span>
+            <button onClick={props.onTap}>x</button>
+          </span>
+        </div>
+        <ul className={classes.cartList}>
+          {cartArray.map((ele) => (
+            <li key={ele.title} className={classes.cartItem}>
+              <div className={classes.summary}>
+                <span className={classes.title}>{ele.title}</span>
+                <span className={classes.price}>
+                  ${ele.price} x {ele.quantity}
+                </span>
+              </div>
+              <div className={classes.actions}>
+                <button onClick={minusItem.bind(null, ele)}>Remove</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className={classes.total}>
+          <span>Total:</span>
+          <span className={classes.price}>${ctx.valuePrice}</span>
+        </div>
       </div>
-      <h1 className="text-center">CART</h1>
-      <ul>
-        {cartArray.map((ele) => (
-          <li key={ele.title} className={classes["cart-items"]}>
-            <div className={classes.summary}>
-              {ele.title}
-              {console.log("cart run")}
-              <span className={classes.price}>${ele.price}</span>
-              <span className={classes.amount}>{ele.quantity}</span>
-            </div>
-            <div className={classes.actions}>
-              <button onClick={minusItem.bind(null, ele.title)}>Remove</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div className={classes.act}>Total: ${ctx.valuePrice}</div>
     </Modal>
   );
 };

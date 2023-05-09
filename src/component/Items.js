@@ -34,82 +34,81 @@ const productsArr = [
 ];
 
 const Items = () => {
-
   const cartctx = useContext(CartContext);
   const emailOfUser = cartctx.email;
 
-  const emailLink= `https://crudcrud.com/api/ca7af99770a54637b0d664dbd5f513da/cart${emailOfUser}`
+  const emailLink = `https://crudcrud.com/api/35e71b380fdc48efa4596060ee9d0e35/${emailOfUser}`;
 
   const addToCart = async (item) => {
-    console.log(item)
-    try{
-      const post=await fetch(emailLink)  
-      const data= await post.json()
+    try {
+      const get = await fetch(emailLink);
+      const data = await get.json();
+      //console.log(data)
+      const itemIndex = data.findIndex((data) => data.id === item.id);
+      const alreadyAddedItem = data[itemIndex];
+      if (get.ok) {
+        if (alreadyAddedItem) {
+          const obj = { ...item, quantity: data[itemIndex].quantity + 1 };
 
-    const itemIndex = data.findIndex((data) => data.id === item.id);
-    console.log(itemIndex)                                     
-    const alreadyAddedItem = data[itemIndex];                     
-     if(post.ok){
-       if(alreadyAddedItem){
-         const obj={...item, quantity:data[itemIndex].quantity+1}
-
-         const post = await fetch(
-          `${emailLink}/${data[itemIndex]._id}`,
-          {
+          const post = await fetch(`${emailLink}/${data[itemIndex]._id}`, {
             method: "PUT",
             body: JSON.stringify(obj),
             headers: {
               "Content-Type": "application/json",
             },
-          }
-        );
-      } else {
-         const post = await fetch(`${emailLink}`, {
-          method: "POST",
-           body: JSON.stringify(item),
-          headers: {
-             "Content-Type": "application/json",
-          },
-        });
-       }
-     }
-     
-     const numberofCartItems = data.reduce((curNum, item) => {
-      return curNum + item.quantity;
-    }, 1);
-    cartctx.numberOfItems(numberofCartItems);
+          });
+        } else {
+          const post = await fetch(`${emailLink}`, {
+            method: "POST",
+            body: JSON.stringify(item),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        }
+      }
 
-    }catch(err){
-console.log(err)
-cartctx.addItem(item)
-const numberofCartItems = cartctx.items.reduce((curNum, item) => {
-  return curNum + item.quantity;
-}, 1);
-cartctx.numberOfItems(numberofCartItems)
+      const numberofCartItems = data.reduce((curNum, item) => {
+        return curNum + item.quantity;
+      }, 1);
+      cartctx.numberOfItems(numberofCartItems);
+    } catch (err) {
+      console.log(err);
+      cartctx.addItem(item);
+
+      const numberofCartItems = cartctx.items.reduce((curNum, item) => {
+        return curNum + item.quantity;
+      }, 1);
+      cartctx.numberOfItems(numberofCartItems);
     }
   };
 
   return (
     <div>
-      <h1 className="text-center p-4 mb-5 bg-warning text-white ">Music</h1>
+      <h1 className="text-center p-4 bg-warning text-white">Music</h1>
 
-      {productsArr.map((item) => (
-        <div key={item.id} className="text-center" id={item.title}>
-          <h2>{item.title}</h2>
-          <Link to={`/store/${item.title}`}>
-            <img src={item.imageUrl} alt={item.title}></img>
-          </Link>
-
-          <h3>${item.price}</h3>
-          <button
-            type="button"
-            className="btn btn-info"
-            onClick={addToCart.bind(null, item)}
-          >
-            Add to Cart
-          </button>
-        </div>
-      ))}
+      <div className="row">
+        {productsArr.map((item) => (
+          <div key={item.id} className="col-md-6 text-center" id={item.title}>
+            <h2>{item.title}</h2>
+            <Link to={`/store/${item.title}`}>
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                className="rounded"
+              ></img>
+            </Link>
+            <h3>${item.price}</h3>
+            <button
+              type="button"
+              className="btn btn-info"
+              onClick={addToCart.bind(null, item)}
+            >
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

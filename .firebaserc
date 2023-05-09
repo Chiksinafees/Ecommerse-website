@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "e-commerse-8afc7",
+    "staging": "e-commerse-8afc7"
+  },
+  "targets": {},
+  "etags": {}
+}

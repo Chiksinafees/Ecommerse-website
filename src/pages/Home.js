@@ -1,3 +1,5 @@
+import "../App.css";
+
 const Home = () => {
   return (
     <div className="container">
@@ -10,7 +12,7 @@ const Home = () => {
             <td>DETROIT,MI</td>
             <td>DTE ENERGY MUSIC THEATRE</td>
             <td>
-              <button>Buy Tickets</button>
+              <button className="btn btn-dark">Buy Tickets</button>
             </td>
           </tr>
           <tr>
@@ -18,7 +20,7 @@ const Home = () => {
             <td>DTORONTO,ON</td>
             <td>BUDWEISER STAGE</td>
             <td>
-              <button>Buy Tickets</button>
+              <button className="btn btn-dark">Buy Tickets</button>
             </td>
           </tr>
           <tr>
@@ -26,7 +28,7 @@ const Home = () => {
             <td>BRISTOW,VA</td>
             <td>JIGGY LUBE LIVE</td>
             <td>
-              <button>Buy Tickets</button>
+              <button className="btn btn-dark">Buy Tickets</button>
             </td>
           </tr>
           <tr>
@@ -34,7 +36,7 @@ const Home = () => {
             <td>PHOENIX,AZ</td>
             <td>AK-CHIN PAVILION</td>
             <td>
-              <button>Buy Tickets</button>
+              <button className="btn btn-dark">Buy Tickets</button>
             </td>
           </tr>
           <tr>
@@ -42,7 +44,7 @@ const Home = () => {
             <td>LAS VEGAS,</td>
             <td>NV T-MOBILE ARENA</td>
             <td>
-              <button>Buy Tickets</button>
+              <button className="btn btn-dark">Buy Tickets</button>
             </td>
           </tr>
           <tr>
@@ -50,7 +52,7 @@ const Home = () => {
             <td> CONCORD,CA</td>
             <td>CONCORD PAVILION</td>
             <td>
-              <button>Buy Tickets</button>
+              <button className="btn btn-dark">Buy Tickets</button>
             </td>
           </tr>
         </tbody>

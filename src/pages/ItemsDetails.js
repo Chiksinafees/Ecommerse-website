@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const productsArr = [
@@ -23,26 +23,37 @@ const productsArr = [
     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
   },
 ];
-const ItemsDetails = () => {
-  
-  const { title } = useParams();
 
+const ItemsDetails = () => {
+  const { title } = useParams();
   const items = productsArr.find((item) => {
     return item.title === title;
   });
-  //console.log(items.title);
 
   return (
     <section>
-      <Container>
+      <Container className="py-5">
         <h1 className="text-center"> Products Details </h1>
-        <h3>{items.title}</h3>
-        <img src={items.imageUrl} alt={items.price}></img>
-        <h3>Price: {items.price}</h3>
-        <h1>Reviews</h1>
-        <p> this is a {items.title} review </p>
+        <Row className="justify-content-center">
+          <Col md={6}>
+            <h3>{items.title}</h3>
+            <img
+              src={items.imageUrl}
+              alt={items.price}
+              className="img-fluid my-3 rounded"
+            ></img>
+            <h3>Price: {items.price}</h3>
+          </Col>
+          <Col md={6}>
+            <h2>Reviews</h2>
+            <p>
+              <b>this is a {items.title} review</b>
+            </p>
+          </Col>
+        </Row>
       </Container>
     </section>
   );
 };
+
 export default ItemsDetails;
